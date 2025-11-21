@@ -76,18 +76,29 @@ export async function buscarClientePorCelular(celular) {
 // Función para obtener productos con stock
 export async function obtenerProductosConStock() {
     try {
-        const q = query(productosRef, where("stock", ">", 0), orderBy("nombre"));
-        //where("stock", ">", 0) - Solo trae productos que tengan stock mayor a 0
-        //orderBy("nombre") - Los ordena alfabéticamente por nombre
-        const querySnapshot = await getDocs(q);
+        console.log('Iniciando carga de productos...');
         
-        const productos = [];//productos = [] - Crea un array vacío para guardar los productos
-        querySnapshot.forEach((doc) => {//querySnapshot.forEach() - Recorre todos los productos encontrados
-            productos.push({
-                id: doc.id, //doc.id - Obtiene el ID único del producto
-                ...doc.data() //doc.data() - Obtiene todos los datos del producto (nombre, precio, stock)
+        // Primero obtener todos los productos y filtrar en memoria para evitar el índice
+        const querySnapshot = await getDocs(productosRef);
+        
+        const todosLosProductos = [];
+        querySnapshot.forEach((doc) => {
+            todosLosProductos.push({
+                id: doc.id,
+                ...doc.data()
             });
         });
+        
+        console.log('Productos totales en Firebase:', todosLosProductos.length);
+        
+        // Filtrar productos con stock > 0 en memoria
+        const productos = todosLosProductos.filter(producto => {
+            const stock = parseInt(producto.stock) || 0;
+            return stock > 0;
+        }).sort((a, b) => a.nombre.localeCompare(b.nombre)); // Ordenar por nombre
+        
+        console.log('Productos con stock > 0:', productos.length);
+        console.log('Productos filtrados:', productos);
         
         return { success: true, productos };
     } catch (error) {
@@ -115,24 +126,29 @@ export async function crearPedido(pedidoData) {
 }
 
 // Función para obtener pedidos (para el panel administrativo)
-export async function obtenerPedidos(filtroEstado = null) { //filtroEstado = null - Parámetro opcional para filtrar por estado ("Pendiente", "Preparado", etc.)
+export async function obtenerPedidos(filtroEstado = null) {
     try {
-        let q;
-        if (filtroEstado) { //if (filtroEstado) - Si se pasa un filtro, busca solo pedidos con ese estado
-            q = query(pedidosEcommerceRef, 
-                where("estado", "==", filtroEstado), 
-                orderBy("fechaPedido", "desc")); // orderBy("fechaPedido", "desc") - Ordena por fecha, más recientes primero
-        } else {
-            q = query(pedidosEcommerceRef, orderBy("fechaPedido", "desc"));
-        }
+        // Obtener todos los pedidos y filtrar en memoria
+        const querySnapshot = await getDocs(pedidosEcommerceRef);
         
-        const querySnapshot = await getDocs(q); //Esta función la usarás en el panel administrativo para ver todos los pedidos
-        const pedidos = [];
+        let pedidos = [];
         querySnapshot.forEach((doc) => {
             pedidos.push({
                 id: doc.id,
                 ...doc.data()
             });
+        });
+        
+        // Filtrar por estado si se especifica
+        if (filtroEstado) {
+            pedidos = pedidos.filter(pedido => pedido.estado === filtroEstado);
+        }
+        
+        // Ordenar por fecha más reciente primero
+        pedidos.sort((a, b) => {
+            const fechaA = a.fechaPedido?.seconds || 0;
+            const fechaB = b.fechaPedido?.seconds || 0;
+            return fechaB - fechaA;
         });
         
         return { success: true, pedidos };

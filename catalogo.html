@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - Forrajería El Sol</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="imagenes/logo_forrajeria.jpg" alt="Forrajería El Sol" class="logo-img">
+                <span class="logo-text">Forrajería El Sol</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html" class="active">Productos</a></li>
+                <li><a href="carrito.html">Carrito (<span id="cartCount">0</span>)</a></li>
+                <li><a href="registro.html" id="loginLink">Registro</a></li>
+                <li><a href="#" id="logoutLink" class="hidden">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="catalog-header">
+        <div class="container">
+            <h1>🛒 Catálogo de Productos</h1>
+            <p>Productos disponibles para retiro en nuestro local</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div id="loginRequired" class="login-required" style="display: none;">
+            <h3>🔐 Inicia sesión para realizar pedidos</h3>
+            <p>Para agregar productos al carrito y realizar pedidos, necesitas estar registrado.</p>
+            <a href="registro.html" class="btn">Registrarse / Ingresar</a>
+        </div>
+
+        <div class="search-filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="searchInput">🔍 Buscar productos:</label>
+                    <input type="text" id="searchInput" placeholder="Nombre del producto..." class="form-group input">
+                </div>
+                <div class="filter-group">
+                    <label for="sortSelect">📊 Ordenar por:</label>
+                    <select id="sortSelect" class="form-group select">
+                        <option value="nombre">Nombre A-Z</option>
+                        <option value="precio-asc">Precio: Menor a Mayor</option>
+                        <option value="precio-desc">Precio: Mayor a Menor</option>
+                        <option value="stock">Stock Disponible</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button id="clearFilters" class="btn btn-secondary">Limpiar Filtros</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="loadingMessage" class="loading-message">
+            ⏳ Cargando productos...
+        </div>
+
+        <div id="noProducts" class="no-products" style="display: none;">
+            <h3>😔 No hay productos disponibles</h3>
+            <p>No se encontraron productos que coincidan con tu búsqueda.</p>
+        </div>
+
+        <div id="productsGrid" class="products-grid">
+            <!-- Los productos se cargan dinámicamente aquí -->
+        </div>
+
+        <div id="notification" class="notification" style="display: none;"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Forrajería El Sol - Todos los derechos reservados</p>
+    </footer>
+
+    <script type="module" src="js/catalogo.js"></script>
+</body>
+</html>

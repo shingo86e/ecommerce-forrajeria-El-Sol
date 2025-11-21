@@ -42,8 +42,8 @@
                 
                 <div class="form-group">
                     <label for="celular">Número de Celular *</label>
-                    <input type="tel" id="celular" name="celular" placeholder="1134567890" required>
-                    <small>Este número se usará para identificarte en futuras compras</small>
+                    <input type="tel" id="celular" name="celular" placeholder="1134567890" maxlength="10" pattern="[0-9]{10}" required>
+                    <small>Solo números, máximo 10 dígitos</small>
                 </div>
                 
                 <div class="form-buttons">
@@ -59,7 +59,7 @@
                 <form id="formLogin">
                     <div class="form-group">
                         <label for="celularLogin">Celular</label>
-                        <input type="tel" id="celularLogin" name="celularLogin" placeholder="1134567890" required>
+                        <input type="tel" id="celularLogin" name="celularLogin" placeholder="1134567890" maxlength="10" pattern="[0-9]{10}" required>
                     </div>
                     <button type="submit" class="btn btn-secondary">Ingresar</button>
                 </form>

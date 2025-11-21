@@ -22,13 +22,51 @@ function validarCelular(celular) {
     // Remover espacios y guiones
     const celularLimpio = celular.replace(/[\s-]/g, '');
     
-    // Validar que tenga entre 10 y 11 dígitos
-    if (celularLimpio.length < 10 || celularLimpio.length > 11) {
+    // Validar que tenga exactamente 10 dígitos
+    if (celularLimpio.length !== 10) {
         return false;
     }
     
     // Validar que solo contenga números
-    return /^\d+$/.test(celularLimpio);
+    return /^\d{10}$/.test(celularLimpio);
+}
+
+// Función para restringir entrada solo a números
+function soloNumeros(input) {
+    input.addEventListener('input', function(e) {
+        // Remover cualquier carácter que no sea número
+        this.value = this.value.replace(/[^0-9]/g, '');
+        
+        // Limitar a 10 caracteres
+        if (this.value.length > 10) {
+            this.value = this.value.slice(0, 10);
+        }
+    });
+    
+    // Prevenir pegar texto no numérico
+    input.addEventListener('paste', function(e) {
+        e.preventDefault();
+        const paste = (e.clipboardData || window.clipboardData).getData('text');
+        const numericPaste = paste.replace(/[^0-9]/g, '').slice(0, 10);
+        this.value = numericPaste;
+    });
+    
+    // Prevenir teclas no numéricas
+    input.addEventListener('keypress', function(e) {
+        // Permitir: backspace, delete, tab, escape, enter
+        if ([46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||
+            // Permitir: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+            (e.keyCode === 65 && e.ctrlKey === true) ||
+            (e.keyCode === 67 && e.ctrlKey === true) ||
+            (e.keyCode === 86 && e.ctrlKey === true) ||
+            (e.keyCode === 88 && e.ctrlKey === true)) {
+            return;
+        }
+        // Asegurar que es un número y detener si no lo es
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
 }
 
 // Función para guardar sesión del cliente
@@ -52,7 +90,7 @@ formRegistro.addEventListener('submit', async (e) => {
     }
     
     if (!validarCelular(celular)) {
-        mostrarNotificacion('El número de celular debe tener entre 10 y 11 dígitos', 'error');
+        mostrarNotificacion('El número de celular debe tener exactamente 10 dígitos', 'error');
         return;
     }
     
@@ -148,6 +186,18 @@ formLogin.addEventListener('submit', async (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     const sesionActiva = localStorage.getItem('sesionActiva');
     const clienteData = localStorage.getItem('clienteEcommerce');
+    
+    // Aplicar validaciones a los campos de celular
+    const celularInput = document.getElementById('celular');
+    const celularLoginInput = document.getElementById('celularLogin');
+    
+    if (celularInput) {
+        soloNumeros(celularInput);
+    }
+    
+    if (celularLoginInput) {
+        soloNumeros(celularLoginInput);
+    }
     
     if (sesionActiva === 'true' && clienteData) {
         const cliente = JSON.parse(clienteData);
