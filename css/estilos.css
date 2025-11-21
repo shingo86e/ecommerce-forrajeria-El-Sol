@@ -14,10 +14,10 @@ body {
 
 /* Header */
 .header {
-    background: linear-gradient(135deg, #2c5530, #4a7c59);
+    background: linear-gradient(135deg, #e67e22, #f39c12);
     color: white;
     padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .nav-container {
@@ -30,8 +30,27 @@ body {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
     font-size: 1.8rem;
     font-weight: bold;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    border-radius: 5px;
+    object-fit: contain;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.logo-text {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .nav-links {
@@ -45,11 +64,23 @@ body {
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    border: 2px solid transparent;
 }
 
 .nav-links a:hover {
     background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.nav-links a.active {
+    background: rgba(255,255,255,0.25);
+    border: 2px solid rgba(255,255,255,0.5);
+    font-weight: bold;
 }
 
 /* Contenedor principal */
@@ -95,14 +126,14 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #4a7c59;
+    border-color: #f39c12;
 }
 
 /* Botones */
 .btn {
     display: inline-block;
     padding: 0.8rem 2rem;
-    background: #4a7c59;
+    background: #f39c12;
     color: white;
     text-decoration: none;
     border: none;
@@ -113,7 +144,7 @@ body {
 }
 
 .btn:hover {
-    background: #2c5530;
+    background: #e67e22;
     transform: translateY(-2px);
 }
 
@@ -143,7 +174,7 @@ body {
 
 /* Footer */
 .footer {
-    background: #2c5530;
+    background: #e67e22;
     color: white;
     text-align: center;
     padding: 2rem 0;
@@ -175,13 +206,136 @@ body {
 }
 
 .notification.success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background: #fef9e7;
+    color: #b7950b;
+    border: 1px solid #f4d03f;
 }
 
 .notification.error {
     background: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+}
+
+/* Estilos específicos del index.html */
+.hero {
+    background: linear-gradient(rgba(230, 126, 34, 0.8), rgba(243, 156, 18, 0.8)), url('imagenes/forrajeria-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+.hero-content .btn {
+    background: rgba(255, 255, 255, 0.95);
+    color: #e67e22;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-content .btn:hover {
+    background: white;
+    color: #d35400;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    color: #f39c12;
+    margin-bottom: 1rem;
+}
+
+.cta-section {
+    background: #f8f9fa;
+    padding: 3rem 0;
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.user-welcome {
+    background: #fef9e7;
+    color: #b7950b;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    display: none;
+}
+
+/* Clases adicionales para mejorar la interfaz */
+.btn-large {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+}
+
+.cta-buttons {
+    margin-top: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Contenedor para botones de formularios */
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.form-buttons .btn {
+    flex: 1;
+    text-align: center;
+    min-width: 0;
+}
+
+/* Responsive para botones en móviles */
+@media (max-width: 480px) {
+    .form-buttons {
+        flex-direction: column;
+    }
+    
+    .form-buttons .btn {
+        width: 100%;
+    }
 }

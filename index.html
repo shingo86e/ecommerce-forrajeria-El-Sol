@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forrajería El Sol - Ecommerce</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="imagenes/logo_forrajeria.jpg" alt="Forrajería El Sol" class="logo-img">
+                <span class="logo-text">Forrajería El Sol</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="catalogo.html">Productos</a></li>
+                <li><a href="carrito.html">Carrito (<span id="cartCount">0</span>)</a></li>
+                <li><a href="registro.html" id="loginLink">Registro</a></li>
+                <li><a href="#" id="logoutLink" class="hidden">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>🌾 Bienvenido a Forrajería El Sol</h1>
+                    <p>Todo lo que necesitas para tus animales, con retiro en nuestro local</p>
+                    <a href="catalogo.html" class="btn btn-large">Ver Productos</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div id="userWelcome" class="user-welcome"></div>
+
+            <section class="features">
+                <div class="feature-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🛒</div>
+                    <h3>Pedidos Online</h3>
+                    <p>Realiza tu pedido desde casa y retíralo en nuestro local en el horario que prefieras</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">⏰</div>
+                    <h3>Retiro Programado</h3>
+                    <p>Elige el día y la franja horaria que mejor te convenga para retirar tu pedido</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📦</div>
+                    <h3>Stock Garantizado</h3>
+                    <p>Solo mostramos productos disponibles, tu pedido estará listo cuando vengas a buscarlo</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🏪</div>
+                    <h3>Atención Personalizada</h3>
+                    <p>Nuestro equipo te ayudará con cualquier consulta sobre los productos</p>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <h2>¿Listo para hacer tu primer pedido?</h2>
+                <p>Regístrate en segundos y comienza a comprar</p>
+                <div class="cta-buttons">
+                    <a href="registro.html" class="btn" id="registerBtn">Registrarse</a>
+                    <a href="catalogo.html" class="btn btn-secondary" id="catalogBtn">Ver Catálogo</a>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <div class="card">
+                    <h2>📍 Información del Local</h2>
+                    <p><strong>Dirección:</strong> [Tu dirección aquí]</p>
+                    <p><strong>Horarios de retiro:</strong></p>
+                    <ul>
+                        <li>Lunes a Viernes: 9:00 - 18:00</li>
+                        <li>Sábados: 9:00 - 15:00</li>
+                        <li>Domingos: Cerrado</li>
+                    </ul>
+                    <p><strong>Teléfono:</strong> [Tu teléfono aquí]</p>
+                    <p><strong>WhatsApp:</strong> [Tu WhatsApp aquí]</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Forrajería El Sol - Todos los derechos reservados</p>
+    </footer>
+
+    <script type="module" src="js/index.js"></script>
+</body>
+</html>
