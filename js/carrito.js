@@ -19,11 +19,10 @@ let carrito = [];
 
 // Función para obtener sesión del cliente
 function obtenerSesion() {
-    const sesionActiva = localStorage.getItem('sesionActiva');
-    const clienteData = localStorage.getItem('clienteEcommerce');
+    const sesionActiva = localStorage.getItem('sesionEcommerce');
     
-    if (sesionActiva === 'true' && clienteData) {
-        return JSON.parse(clienteData);
+    if (sesionActiva) {
+        return JSON.parse(sesionActiva);
     }
     return null;
 }
@@ -61,6 +60,9 @@ function mostrarNotificacion(mensaje, tipo = 'success') {
 // Función para actualizar interfaz según sesión
 function actualizarInterfazSesion() {
     clienteSesion = obtenerSesion();
+    const loginLink = document.getElementById('loginLink');
+    const logoutLink = document.getElementById('logoutLink');
+    const misPedidosLink = document.getElementById('misPedidosLink');
     
     if (clienteSesion) {
         loginRequired.style.display = 'none';
@@ -68,6 +70,7 @@ function actualizarInterfazSesion() {
         loginLink.textContent = `👋 ${clienteSesion.nombre}`;
         loginLink.href = '#';
         logoutLink.classList.remove('hidden');
+        misPedidosLink.classList.remove('hidden');
         cargarCarrito();
     } else {
         loginRequired.style.display = 'block';
@@ -75,6 +78,7 @@ function actualizarInterfazSesion() {
         loginLink.textContent = 'Registro';
         loginLink.href = 'registro.html';
         logoutLink.classList.add('hidden');
+        misPedidosLink.classList.add('hidden');
     }
 }
 
@@ -225,8 +229,7 @@ function procederCheckout() {
 
 // Función para cerrar sesión
 function cerrarSesion() {
-    localStorage.removeItem('sesionActiva');
-    localStorage.removeItem('clienteEcommerce');
+    localStorage.removeItem('sesionEcommerce');
     localStorage.removeItem('carrito');
     window.location.reload();
 }

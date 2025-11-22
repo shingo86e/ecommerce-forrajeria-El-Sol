@@ -71,8 +71,7 @@ function soloNumeros(input) {
 
 // Función para guardar sesión del cliente
 function guardarSesion(cliente) {
-    localStorage.setItem('clienteEcommerce', JSON.stringify(cliente));
-    localStorage.setItem('sesionActiva', 'true');
+    localStorage.setItem('sesionEcommerce', JSON.stringify(cliente));
 }
 
 // Manejar registro de nuevo cliente
@@ -184,8 +183,7 @@ formLogin.addEventListener('submit', async (e) => {
 
 // Verificar si ya hay una sesión activa al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-    const sesionActiva = localStorage.getItem('sesionActiva');
-    const clienteData = localStorage.getItem('clienteEcommerce');
+    const sesionActiva = localStorage.getItem('sesionEcommerce');
     
     // Aplicar validaciones a los campos de celular
     const celularInput = document.getElementById('celular');
@@ -199,8 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
         soloNumeros(celularLoginInput);
     }
     
-    if (sesionActiva === 'true' && clienteData) {
-        const cliente = JSON.parse(clienteData);
+    if (sesionActiva) {
+        const cliente = JSON.parse(sesionActiva);
         mostrarNotificacion(`Ya tienes sesión activa, ${cliente.nombre}. Redirigiendo al catálogo...`, 'success');
         
         setTimeout(() => {

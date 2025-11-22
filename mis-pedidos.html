@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - Forrajería El Sol</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="imagenes/logo_forrajeria.jpg" alt="Forrajería El Sol" class="logo-img">
+                <span class="logo-text">Forrajería El Sol</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Productos</a></li>
+                <li><a href="carrito.html">Carrito (<span id="cartCount">0</span>)</a></li>
+                <li><a href="mis-pedidos.html" class="active">Mis Pedidos</a></li>
+                <li><a href="registro.html" id="loginLink">Registro</a></li>
+                <li><a href="#" id="logoutLink" class="hidden">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="orders-header">
+            <h1>📋 Mis Pedidos</h1>
+            <p>Aquí puedes ver el estado de todos tus pedidos</p>
+        </div>
+
+        <div id="loginRequired" class="login-required" style="display: none;">
+            <h3>🔐 Inicia sesión para ver tus pedidos</h3>
+            <p>Para ver tus pedidos, necesitas estar registrado.</p>
+            <a href="registro.html" class="btn">Registrarse / Ingresar</a>
+        </div>
+
+        <div id="ordersContainer" class="orders-container">
+            <div id="loadingOrders" class="loading-message">
+                <div class="spinner"></div>
+                <p>Cargando tus pedidos...</p>
+            </div>
+
+            <div id="noOrders" class="no-orders" style="display: none;">
+                <div class="empty-orders-icon">📦</div>
+                <h3>No tienes pedidos aún</h3>
+                <p>¡Realiza tu primer pedido desde nuestro catálogo!</p>
+                <a href="catalogo.html" class="btn">Ver Productos</a>
+            </div>
+
+            <div id="ordersList" class="orders-list" style="display: none;">
+                <!-- Los pedidos se cargan dinámicamente -->
+            </div>
+        </div>
+
+        <div id="notification" class="notification" style="display: none;"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Forrajería El Sol - Todos los derechos reservados</p>
+    </footer>
+
+    <script type="module" src="js/mis-pedidos.js"></script>
+</body>
+</html>

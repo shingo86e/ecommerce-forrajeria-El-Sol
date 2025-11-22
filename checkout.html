@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido - Forrajería El Sol</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="imagenes/logo_forrajeria.jpg" alt="Forrajería El Sol" class="logo-img">
+                <span class="logo-text">Forrajería El Sol</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Productos</a></li>
+                <li><a href="carrito.html">Carrito</a></li>
+                <li><a href="mis-pedidos.html" id="misPedidosLink" class="hidden">Mis Pedidos</a></li>
+                <li><a href="registro.html" id="loginLink">Registro</a></li>
+                <li><a href="#" id="logoutLink" class="hidden">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="checkout-header">
+            <h1>🏁 Finalizar Pedido</h1>
+            <p>Selecciona día y horario para retirar tu pedido</p>
+        </div>
+
+        <div id="loginRequired" class="login-required" style="display: none;">
+            <h3>🔐 Inicia sesión para finalizar tu pedido</h3>
+            <p>Para procesar tu pedido, necesitas estar registrado.</p>
+            <a href="registro.html" class="btn">Registrarse / Ingresar</a>
+        </div>
+
+        <div id="emptyCartCheckout" class="empty-cart" style="display: none;">
+            <div class="empty-cart-icon">🛒</div>
+            <h3>No tienes productos en el carrito</h3>
+            <p>Agrega algunos productos antes de proceder al checkout</p>
+            <a href="catalogo.html" class="btn">Ver Productos</a>
+        </div>
+
+        <div id="checkoutContainer" class="checkout-container">
+            <div id="checkoutContent" class="checkout-content">
+                <!-- Formulario principal -->
+                <div class="checkout-form">
+                    <div class="section-title">👤 Datos del Cliente</div>
+                    <div class="customer-info">
+                        <h4>Cliente:</h4>
+                        <p><strong>Nombre:</strong> <span id="nombreCliente"></span></p>
+                        <p><strong>Teléfono:</strong> <span id="telefonoCliente"></span></p>
+                        <p><strong>Email:</strong> <span id="emailCliente"></span></p>
+                    </div>
+
+                    <form id="checkoutForm">
+                        <div class="section-title">📅 Fecha y Hora de Retiro</div>
+                        
+                        <div class="datetime-group">
+                            <div class="form-group">
+                                <label for="fechaRetiro">Fecha de Retiro:</label>
+                                <input type="date" id="fechaRetiro" name="fechaRetiro" required>
+                                <small>Selecciona un día hábil (Lunes a Sábado)</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="horaRetiro">Hora de Retiro:</label>
+                                <input type="time" id="horaRetiro" name="horaRetiro" min="08:00" max="18:00" required>
+                                <small>Horario: 8:00 AM - 6:00 PM</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group-full">
+                            <label for="comentarios">Comentarios adicionales (opcional):</label>
+                            <textarea id="comentarios" name="comentarios" rows="3" 
+                                    placeholder="Instrucciones especiales para tu pedido..."></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Resumen del pedido -->
+                <div id="orderSummary" class="order-summary">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Sección de confirmación -->
+            <div id="confirmationSection" class="confirmation-section">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                
+                <div class="confirmation-message">
+                    <h3>¡Pedido confirmado con éxito!</h3>
+                    <p>Tu pedido ha sido recibido y está siendo preparado.</p>
+                </div>
+                
+                <div class="order-details">
+                    <h4>Detalles del Pedido</h4>
+                    <div class="detail-row">
+                        <strong>Número de Pedido:</strong>
+                        <span id="numeroPedido"></span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Fecha y Hora de Retiro:</strong>
+                        <span id="fechaRetiroConfirm"></span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Total:</strong>
+                        <span id="totalConfirm"></span>
+                    </div>
+                    <div class="detail-row" style="display: none;">
+                        <strong>Comentarios:</strong>
+                        <span id="comentariosConfirm"></span>
+                    </div>
+                </div>
+                
+                <div class="order-details">
+                    <h4>Productos Solicitados</h4>
+                    <div id="productosConfirm">
+                        <!-- Se llenarán dinámicamente -->
+                    </div>
+                </div>
+                
+                <div class="pickup-instructions">
+                    <h4>Instrucciones de Retiro</h4>
+                    <ul>
+                        <li>Presenta tu número de pedido al llegar</li>
+                        <li>Horario: Lunes a Sábado de 8:00 AM a 6:00 PM</li>
+                        <li>Ubicación: [Dirección de la forrajería]</li>
+                        <li>En caso de dudas, llama al: [Teléfono]</li>
+                    </ul>
+                </div>
+                
+                <div class="order-actions">
+                    <button onclick="verMasProductos()" class="btn">
+                        Ver Más Productos
+                    </button>
+                    <button onclick="volverAlCatalogo()" class="btn btn-secondary">
+                        Volver al Catálogo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="notification" class="notification" style="display: none;"></div>
+        
+        <!-- Modal de confirmación -->
+        <div id="successModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h3>✅ ¡Pedido Confirmado!</h3>
+                <p>Tu pedido ha sido procesado exitosamente.</p>
+                <div id="orderDetails"></div>
+                <div class="modal-actions">
+                    <button id="closeModal" class="btn">Cerrar</button>
+                    <a href="index.html" class="btn btn-secondary">Volver al Inicio</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay de loading -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Procesando tu pedido...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Forrajería El Sol - Todos los derechos reservados</p>
+    </footer>
+
+    <script type="module" src="js/checkout.js"></script>
+</body>
+</html>
