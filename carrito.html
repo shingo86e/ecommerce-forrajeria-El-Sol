@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Forrajería El Sol</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="imagenes/logo_forrajeria.jpg" alt="Forrajería El Sol" class="logo-img">
+                <span class="logo-text">Forrajería El Sol</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Productos</a></li>
+                <li><a href="carrito.html" class="active">Carrito (<span id="cartCount">0</span>)</a></li>
+                <li><a href="registro.html" id="loginLink">Registro</a></li>
+                <li><a href="#" id="logoutLink" class="hidden">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="cart-header">
+            <h1>🛒 Tu Carrito de Compras</h1>
+            <p>Revisa tus productos antes de proceder al checkout</p>
+        </div>
+
+        <div id="loginRequired" class="login-required" style="display: none;">
+            <h3>🔐 Inicia sesión para ver tu carrito</h3>
+            <p>Para ver y gestionar tu carrito de compras, necesitas estar registrado.</p>
+            <a href="registro.html" class="btn">Registrarse / Ingresar</a>
+        </div>
+
+        <div id="cartContainer" class="cart-container">
+            <div id="emptyCart" class="empty-cart" style="display: none;">
+                <div class="empty-cart-icon">🛒</div>
+                <h3>Tu carrito está vacío</h3>
+                <p>¡Agrega algunos productos desde nuestro catálogo!</p>
+                <a href="catalogo.html" class="btn">Ver Productos</a>
+            </div>
+
+            <div id="cartContent" class="cart-content" style="display: none;">
+                <div class="cart-items" id="cartItems">
+                    <!-- Los items del carrito se cargan dinámicamente -->
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-card">
+                        <h3>📋 Resumen del Pedido</h3>
+                        
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0</span>
+                        </div>
+                        
+                        <div class="summary-row total">
+                            <span><strong>Total:</strong></span>
+                            <span id="total"><strong>$0</strong></span>
+                        </div>
+                        
+                        <div class="summary-items">
+                            <small id="totalItems">0 productos</small>
+                        </div>
+                        
+                        <button id="checkoutBtn" class="btn btn-large checkout-btn">
+                            Proceder al Checkout
+                        </button>
+                        
+                        <a href="catalogo.html" class="btn btn-secondary">
+                            Seguir Comprando
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="notification" class="notification" style="display: none;"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Forrajería El Sol - Todos los derechos reservados</p>
+    </footer>
+
+    <script type="module" src="js/carrito.js"></script>
+</body>
+</html>

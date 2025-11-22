@@ -129,9 +129,22 @@ function crearCardProducto(producto) {
     const card = document.createElement('div');
     card.className = 'product-card';
     
+    // Determinar la imagen a mostrar
+    let imagenHtml = '';
+    if (producto.imagen && producto.imagen.trim() !== '') {
+        imagenHtml = `
+            <img src="${producto.imagen}" alt="${producto.nombre}" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+            <div class="fallback-icon" style="display: none; width: 100%; height: 100%; background: linear-gradient(45deg, #f8f9fa, #e9ecef); align-items: center; justify-content: center; font-size: 3rem; color: #6c757d;">📦</div>
+        `;
+    } else {
+        imagenHtml = '<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #6c757d;">📦</div>';
+    }
+    
     card.innerHTML = `
         <div class="product-image">
-            📦
+            ${imagenHtml}
         </div>
         <div class="product-info">
             <div class="product-name">${producto.nombre}</div>
@@ -207,7 +220,8 @@ window.agregarAlCarrito = function(productoId) {
             nombre: producto.nombre,
             precio: producto.precio,
             cantidad: cantidad,
-            stock: producto.stock
+            stock: producto.stock,
+            imagen: producto.imagen || null // Agregar imagen al carrito
         });
         mostrarNotificacion(`${producto.nombre} agregado al carrito`, 'success');
     }
